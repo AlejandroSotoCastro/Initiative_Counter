@@ -5,17 +5,15 @@ const display = document.querySelector('.display');
 
 var table = document.getElementById("table");
 
-display.value="hola"
+display.value="Round 0"
+var counter=0;
 
 function sortTable() {
 
-  if (display.value==="hola") {
-	display.value="adios"
-	}
-  else{
+  counter= counter + 1;
+  display.value=("Round " + counter.toString());
 	
-   display.value="hola"
-
-  }
+ 
+  
 
 }
