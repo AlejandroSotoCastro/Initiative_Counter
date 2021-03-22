@@ -6,14 +6,14 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>Initiative</title>
 </head>
-<body>
+<body onload="createTable()">
 
   <!-- Initiative Counter-->
   <div class="initCounter">
 
     <!-- display -->
     <input type="text" class="display" disabled>
-    <button class="button" onclick="sortTable()">Next Round</button>
+    <button class="button" onclick="sortTable()">Next Turn</button>
   </div>
 
   <table id="table">
@@ -26,16 +26,25 @@
       </tr>
     </thead>
     <tbody>
-	<tr>
+      <tr>
         <td><input type= "text" value="0" onClick="this.select();"></td>
-
         <td><input type= "text" value="Character Name" onClick="this.select();"></td>
         <td><input type= "text" value="HP" onClick="this.select();"></td>
       </tr>
+       <tr>
+        <td><input type= "text" value="0" onClick="this.select();"></td>
+        <td><input type= "text" value="Character Name" onClick="this.select();"></td>
+        <td><input type= "text" value="HP" onClick="this.select();"></td>
+      </tr>
+    
+     
+     
+
     </tbody>
 
 
   </table>
+  <div id="cont"></div>   <!--the container to add the table.-->
 </body>
 <script type="text/javascript" src="script.js"></script>
 </html>
