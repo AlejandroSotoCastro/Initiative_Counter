@@ -84,7 +84,8 @@ function createTable() {
                 ele.setAttribute('value', '');
 		
 		if(c == 1) {
-			ele.setAttribute('oninput',"sortTable()");
+			ele.setAttribute('onBlur',"sortTable()");
+			ele.setAttribute('id',"init");
 		}
 
                 td.appendChild(ele);
@@ -92,7 +93,7 @@ function createTable() {
 	
         }
     	
-    }
+    }	
 
 
   // function to delete a row.
@@ -110,5 +111,38 @@ function turn() {
 
 function sortTable() {
  
- console.log("hola")
+    var table, i, x, y; 
+                table = document.getElementById("empTable"); 
+                var switching = true; 
+  		
+                // Run loop until no switching is needed 
+                while (switching) { 
+		    
+                    switching = false; 
+                    var rows = table.rows; 
+                    
+                    // Loop to go through all rows 
+                    for (i = 1; i < (rows.length - 1); i++) { 
+                        var Switch = false; 
+			
+  
+                        // Fetch 2 elements that need to be compared 
+                        x = rows[i].cells[1].children[0].value;
+                        y = rows[i+1].cells[1].children[0].value;
+
+ 			if (x.toLowerCase() < y.toLowerCase()) {
+        		//if so, mark as a switch and break the loop:
+        		switching = true;
+        		break;
+      }
+
+                    } 
+
+		   if (switching) {
+                       /*If a switch has been marked, make the switch
+                        and mark that a switch has been done:*/
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      			switching = true;
+     		   }
+     }
 }
