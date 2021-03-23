@@ -8,8 +8,9 @@ var table = document.getElementById("table");
 
 
 
-display.value="Round 0"
-var counter=0;
+display.value="Round 1"
+var round_counter=1;
+var turn_counter=1;
 
 var arrHead = new Array();
 arrHead = ['','INITIATIVE', 'NAME', 'HP']; // table headers.
@@ -105,9 +106,27 @@ function createTable() {
 
 function turn() {
 
-  counter= counter + 1;
-  display.value=("Round " + counter.toString());
-	
+  
+  var table = document.getElementById("empTable"); 
+  var rows = table.rows;
+   for (i = 1; i < (rows.length ); i++) { 
+
+	rows[i].style.backgroundColor= "#f4f7f8";
+   }
+   if(rows.length===turn_counter){
+   turn_counter=1;
+   round_counter= round_counter + 1;
+   rows[turn_counter].style.backgroundColor= "#78c986";
+   console.log("reset")
+   }
+   else{
+    rows[turn_counter].style.backgroundColor= "#78c986";
+    
+    console.log("normal")  
+   }
+  turn_counter+=1; 
+  display.value=("Round " + round_counter.toString());
+
 }
 
 
