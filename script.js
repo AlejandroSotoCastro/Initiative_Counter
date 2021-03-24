@@ -1,5 +1,5 @@
-// select all the buttons
-const buttons = document.querySelectorAll('button');
+
+
 // select the <input type="text" class="display" disabled> element
 const display = document.querySelector('.display');				
 
@@ -103,13 +103,43 @@ function createTable() {
   // function to delete a row.
     function removeRow(oButton) {
         var empTab = document.getElementById('empTable');
-	console.log(oButton.parentNode.parentNode.rowIndex,turn_counter);
-	if(oButton.parentNode.parentNode.rowIndex===turn_counter-1){
-		turn();
-		console.log(oButton.parentNode.parentNode.rowIndex);
+        var thisRow =oButton.parentNode.parentNode.rowIndex;
+	console.log("Before delete row "+thisRow +" on turn "+(turn_counter-1)+" tblsize "+ (empTab.rows.length-1));
+	
+    if(thisRow<turn_counter-1){
+
+    	turn_counter-=1;
+    	console.log("a row before turn was deleted ")
+    	
+    }
+
+	else if(thisRow===turn_counter-1){
+		
+		if (thisRow!=(empTab.rows.length-1)){
+			console.log("last row turn deleted");
+			turn();
+			turn_counter-=1;
+			 
+			}
+		else if(thisRow===1){
+			console.log("first row deleted")
+
+		}	
+		else{
+
+		  turn();
+		  console.log(turn_counter);
+		  }
+		  
+		  
+		console.log("Current turn row was deleted "+oButton.parentNode.parentNode.rowIndex);
 
         }
-        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); // buttton -> td -> tr
+     
+	  
+      empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); // buttton -> td -> tr
+      console.log("After delete row "+thisRow +" on turn "+(turn_counter-1)+" tblsize "+ (empTab.rows.length-1));
+	
     }
 
 function turn() {
@@ -124,16 +154,18 @@ function turn() {
    if(rows.length===turn_counter){
    turn_counter=1;
    round_counter= round_counter + 1;
-   rows[turn_counter].style.backgroundColor= "#78c986";
-   console.log("reset")
+   //rows[turn_counter].style.backgroundColor= "#78c986";
+  // console.log("New Round")
    }
    else{
-    rows[turn_counter].style.backgroundColor= "#78c986";
     
-    console.log("normal")  
+    
+    //console.log("Next Turn")  
    }
+  rows[turn_counter].style.backgroundColor= "#78c986";
   turn_counter+=1; 
   display.value=("Round " + round_counter.toString());
+  //console.log("current turn "+ (turn_counter-1));
 
 }
 
