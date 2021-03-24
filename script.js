@@ -88,6 +88,8 @@ function createTable() {
 			ele.setAttribute('onBlur',"sortTable()");
 			ele.setAttribute('id',"init");
 			ele.setAttribute('type', 'number');
+			ele.setAttribute('autocomplete', 'off');
+			ele.setAttribute('value', '0');
 		}
 
                 td.appendChild(ele);
