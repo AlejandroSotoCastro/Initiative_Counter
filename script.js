@@ -103,6 +103,12 @@ function createTable() {
   // function to delete a row.
     function removeRow(oButton) {
         var empTab = document.getElementById('empTable');
+	console.log(oButton.parentNode.parentNode.rowIndex,turn_counter);
+	if(oButton.parentNode.parentNode.rowIndex===turn_counter-1){
+		turn();
+		console.log(oButton.parentNode.parentNode.rowIndex);
+
+        }
         empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); // buttton -> td -> tr
     }
 
