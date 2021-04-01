@@ -3,25 +3,32 @@ const display = document.querySelector(".display");
 
 var table = document.getElementById("table");
 
+/*Start counter and turn at 1*/
 display.value = "Round 1";
 var round_counter = 1;
 var turn_counter = 1;
 
-var arrHead = new Array();
-arrHead = ["", "INITIATIVE", "NAME", "HP"]; // table headers.
 
-// first create a TABLE structure by adding few headers.
+/* table headers. */
+var arrHead = new Array();
+arrHead = ["", "INITIATIVE", "NAME", "HP"]; 
+
+/*Function that creates the table. It's called onload*/
 
 function createTable() {
   var empTable = document.createElement("table");
   empTable.setAttribute("id", "empTable"); // table id.
-  empTable.setAttribute("class", "fixed_headers");
+  empTable.setAttribute("class", "fixed_headers"); //table class
+
+  /*Create table head*/
   var thead = empTable.createTHead();
   var tr = empTable.insertRow(-1);
   thead.appendChild(tr);
 
   for (var h = 0; h < arrHead.length; h++) {
-    var th = document.createElement("th"); // create table headers
+
+    /* create table head */
+    var th = document.createElement("th"); 
     if (h == 0) {
       //first colum
       var button = document.createElement("input");
@@ -29,36 +36,40 @@ function createTable() {
       button.setAttribute("value", "New Row");
       button.setAttribute("class", "button");
 
-      // add button's 'onclick' event.
+      /* add button's 'onclick' event.*/
       button.setAttribute("onclick", "addRow()");
 
       th.appendChild(button);
+
+      /*Else add a header from the array */
     } else {
       th.innerHTML = arrHead[h];
     }
     tr.appendChild(th);
   }
+
+  /* Add the TABLE to the container.*/
   var div = document.getElementById("cont");
-  div.appendChild(empTable); // add the TABLE to the container.
+  div.appendChild(empTable); 
+  /**Add a new row */
   addRow();
 }
 
-// now, add a new to the TABLE.
+/*Add a new row function*/
 function addRow() {
   var empTab = document.getElementById("empTable");
 
-  var rowCnt = empTab.rows.length; // table row count.
   var tr = empTab.insertRow(-1); // the table row.
   var tbody = empTab.getElementsByTagName('tbody')[0];
   tbody.appendChild(tr);
-  //tr = empTab.insertRow(rowCnt);
 
   for (var c = 0; c < arrHead.length; c++) {
     var td = document.createElement("td"); // table definition.
     td = tr.insertCell(c);
 
+     /* the first column.*/
     if (c == 0) {
-      // the first column.
+     
       // add a button in every new row in the first column.
       var button = document.createElement("input");
 
@@ -76,7 +87,8 @@ function addRow() {
       var ele = document.createElement("input");
       ele.setAttribute("type", "text");
       ele.setAttribute("value", "");
-
+      
+      /* 2nd it's the initiative and it is sorted*/ 
       if (c == 1) {
         ele.setAttribute("onBlur", "sortTable()");
         ele.setAttribute("id", "init");
@@ -90,48 +102,33 @@ function addRow() {
   }
 }
 
-// function to delete a row.
+/* function to delete a row.*/
 function removeRow(oButton) {
   var empTab = document.getElementById("empTable");
   var thisRow = oButton.parentNode.parentNode.rowIndex;
-  console.log(
-    "Before delete row " +
-      thisRow +
-      " on turn " +
-      (turn_counter - 1) +
-      " tblsize " +
-      (empTab.rows.length - 1)
-  );
 
+   /* If the row beein deleted it's before than the row that currently has its turn*/
   if (thisRow < turn_counter - 1) {
+    /*Reduce the turn counter by one*/
     turn_counter -= 1;
-    console.log("a row before turn was deleted ");
-  } else if (thisRow === turn_counter - 1) {
-    if (thisRow != empTab.rows.length - 1) {
-      console.log("last row turn deleted");
-      turn();
-      turn_counter -= 1;
-    } else if (thisRow === 1) {
-      console.log("first row deleted");
-    } else {
-      turn();
-      console.log(turn_counter);
-    }
 
-    console.log(
-      "Current turn row was deleted " + oButton.parentNode.parentNode.rowIndex
-    );
+   /* If the row beein deleted currently has its turn*/
+  } else if (thisRow === turn_counter - 1) {
+     
+
+      /*pass the turn before deleting*/ 
+       turn();
+     /*If it's NOT the last row of the table */
+     if (thisRow != empTab.rows.length - 1) {
+     
+       /*Reduce the turn counter by one*/
+       turn_counter -= 1;
+     }
+
   }
 
   empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); // buttton -> td -> tr
-  console.log(
-    "After delete row " +
-      thisRow +
-      " on turn " +
-      (turn_counter - 1) +
-      " tblsize " +
-      (empTab.rows.length - 1)
-  );
+ 
 }
 
 function turn() {
@@ -143,15 +140,14 @@ function turn() {
   if (rows.length === turn_counter) {
     turn_counter = 1;
     round_counter = round_counter + 1;
-    //rows[turn_counter].style.backgroundColor= "#78c986";
-    // console.log("New Round")
+    
   } else {
-    //console.log("Next Turn")
+   
   }
   rows[turn_counter].style.backgroundColor = "#78c986";
   turn_counter += 1;
   display.value = "Round " + round_counter.toString();
-  //console.log("current turn "+ (turn_counter-1));
+  
 }
 
 function sortTable() {
