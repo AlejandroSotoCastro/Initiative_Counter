@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Initiative Utility</title>
+    <title>Initiative</title>
   </head>
   <body onload="createTable()">
+
     <!-- Initiative Counter-->
     <div class="initCounter">
+
       <!-- display -->
       <input type="text" class="display" disabled />
+      <!-- Button to iterate through turns -->
       <button class="button" onclick="turn()">Next Turn</button>
     </div>
 
     <div id="cont" class="cont" style="overflow-x: auto"></div>
-    <!--the container to add the table.-->
+        <!--the container to add the table.-->
   </body>
   </html>
 
@@ -47,7 +50,7 @@
           //first colum
           var button = document.createElement("input");
           button.setAttribute("type", "button");
-          button.setAttribute("value", "New Row");
+          button.setAttribute("value", "Add New Row");
           button.setAttribute("class", "button");
 
           // add button's 'onclick' event.
@@ -64,12 +67,12 @@
       addRow();
     }
 
-    // now, add a new to the TABLE.
+    // now, add a new row to the TABLE.
     function addRow() {
       var empTab = document.getElementById("empTable");
 
       var rowCnt = empTab.rows.length; // table row count.
-      var tr = empTab.insertRow(-1); // the table row.
+      var tr = empTab.insertRow(-1); // the table row inserted at the end.
       var tbody = empTab.getElementsByTagName("tbody")[0];
       tbody.appendChild(tr);
       //tr = empTab.insertRow(rowCnt);
@@ -136,7 +139,6 @@
       }
 
       empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); // buttton -> td -> tr
-      console.log("After delete row " + thisRow + " on turn " + (turn_counter - 1) + " tblsize " + (empTab.rows.length - 1));
     }
 
     function turn() {
@@ -148,15 +150,11 @@
       if (rows.length === turn_counter) {
         turn_counter = 1;
         round_counter = round_counter + 1;
-        //rows[turn_counter].style.backgroundColor= "#78c986";
-        // console.log("New Round")
-      } else {
-        //console.log("Next Turn")
-      }
+      
+      } 
       rows[turn_counter].style.backgroundColor = "#78c986";
       turn_counter += 1;
       display.value = "Round " + round_counter.toString();
-      //console.log("current turn "+ (turn_counter-1));
     }
 
     function sortTable() {
@@ -193,7 +191,7 @@
       }
     }
   </script>
-   <style>
+  <style>
     body {
       width: 100vw;
       height: 100vh;
@@ -201,8 +199,8 @@
       background-color: #222831;
       font-family: sans-serif;
     }
-    /* width */
-    ::-webkit-scrollbar {
+     /* width */
+     ::-webkit-scrollbar {
       width: 13px;
     }
 

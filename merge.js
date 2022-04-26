@@ -5,8 +5,8 @@ const path = require("path");
 let inputFiles;
 let outputFile;
 
-const scriptTemplate = (data) => `<script>\n${data}\n</script>`;
-const styleTemplate = (data) => `\n<style>\n${data}\n</style>\n`;
+const scriptTemplate = (data) => `\n<script>\n${data}</script>`;
+const styleTemplate = (data) => `\n<style>\n${data}</style>\n`;
 
 
 const ReadAndMerge = function (inputFiles, outputFile) {
