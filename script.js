@@ -8,7 +8,7 @@ var round_counter = 1;
 var turn_counter = 1;
 
 var arrHead = new Array();
-arrHead = ["", "INITIATIVE", "NAME", "HP"]; // table headers.
+arrHead = ["", "INITIATIVE", "NAME", "HP", "CONDITIONS"]; // table headers.
 
 // first create a TABLE structure by adding few headers.
 
@@ -118,16 +118,14 @@ function removeRow(oButton) {
 }
 
 function turn() {
-  var table = document.getElementById("empTable");
-  var rows = table.rows;
+  var rows = getRows();
   for (i = 1; i < rows.length; i++) {
     rows[i].style.backgroundColor = "#f4f7f8";
   }
   if (rows.length === turn_counter) {
     turn_counter = 1;
     round_counter = round_counter + 1;
-  
-  } 
+  }
   rows[turn_counter].style.backgroundColor = "#78c986";
   turn_counter += 1;
   display.value = "Round " + round_counter.toString();
@@ -165,4 +163,18 @@ function sortTable() {
       switching = true;
     }
   }
+}
+
+function reset() {
+  display.value = "Round 1";
+  var rows = getRows();
+  rows[turn_counter - 1].style.backgroundColor = "#f4f7f8";
+  round_counter = 1;
+  turn_counter = 1;
+}
+
+function getRows() {
+  var table = document.getElementById("empTable");
+  var rows = table.rows;
+  return rows;
 }

@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Initiative</title>
-</head>
-<body onload="createTable()">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Initiative</title>
+  </head>
+  <body onload="createTable()">
+    <!-- Initiative Counter-->
+    <div class="initCounter">
+      <button class="button" onclick="reset()">Reset</button>
+      <!-- display -->
+      <input type="text" class="display" disabled />
+      <!-- Button to iterate through turns -->
+      <button class="button" onclick="turn()">Next Turn</button>
+    </div>
 
-  <!-- Initiative Counter-->
-  <div class="initCounter">
-
-     <!-- display -->
-    <input type="text" class="display" disabled />
-    <!-- Button to iterate through turns -->
-    <button class="button" onclick="turn()">Next Turn</button>
-  </div>
-
-
-  <div id="cont"></div>   
-  <!--the container to add the table.-->
-</body>
+    <div id="cont"></div>
+    <!--the container to add the table.-->
+  </body>
 </html>
