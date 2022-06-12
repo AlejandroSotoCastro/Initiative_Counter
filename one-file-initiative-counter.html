@@ -189,6 +189,8 @@ function sortTable() {
 }
 
 function reset() {
+  // If turn_counter is 1 it will reset the header
+  if (turn_counter === 1) return;
   display.value = "Round 1";
   var rows = getRows();
   rows[turn_counter - 1].style.backgroundColor = "#f4f7f8";
