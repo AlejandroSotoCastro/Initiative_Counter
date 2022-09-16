@@ -1,4 +1,5 @@
 # Initiative_Counter
- Small interface to keep track of iniciative in tabletop RPG games
+
+Small interface to keep track of initiative in tabletop RPG games
 
 #
