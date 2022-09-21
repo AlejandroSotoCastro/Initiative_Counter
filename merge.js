@@ -35,7 +35,7 @@ const updateInOut = function () {
   //sanitize
   inputFiles = [path.join(__dirname, `./base.html`), path.join(__dirname, `./script.js`), path.join(__dirname, `./style.css`)];
 
-  outputFile = path.join(__dirname, `./release/one-file-initiative-counter.html`);
+  outputFile = path.join(__dirname, `./one-file-initiative-counter.html`);
 };
 
 // read and Merge
