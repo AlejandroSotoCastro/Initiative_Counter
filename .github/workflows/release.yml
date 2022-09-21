@@ -15,4 +15,4 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_DEPLOY_TO_PROD: true
           NETLIFY_SITE_ID: ${{secrets.INIT_COUNTER_SITE_ID}}
-          build_directory: ./one-file-initiative-counter.html
+          build_directory: ./release
