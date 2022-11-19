@@ -15,7 +15,18 @@
       <button class="button" onclick="turn()">Next Turn</button>
     </div>
 
-    <div id="cont"></div>
+    <table id="table" class="fixed_headers">
+      <thead>
+        <tr>
+          <th><input type="button" value="Add New Row" class="button" onclick="addRow()" /></th>
+          <th>INITIATIVE</th>
+          <th>NAME</th>
+          <th>HP</th>
+          <th>CONDITIONS</th>
+        </tr>
+      </thead>
+      <tbody id="tBody"></tbody>
+    </table>
     <!--the container to add the table.-->
   </body>
 </html>
