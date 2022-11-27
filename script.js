@@ -7,84 +7,105 @@ display.value = "Round 1";
 var round_counter = 1;
 var turn_counter = 1;
 
-var arrHead = new Array();
-arrHead = ["", "INITIATIVE", "NAME", "HP", "CONDITIONS"]; // table headers.
+// table headers.
+props = ["", "INITIATIVE", "NAME", "HP", "CONDITIONS"];
 
 // first create a TABLE structure by adding few headers.
 
 class Row {
-  init = null;
-  name = "";
-  hp = "";
-  conditions = "";
-  hasATurn = false;
-}
-let rows = [];
-let round = 1;
+  constructor(init, name, hp, conditions, hasATurn) {
+    this.init = init || null;
+    this.name = name || "";
+    this.hp = hp || "";
+    this.conditions = conditions || "";
+    this.hasATurn = hasATurn || false;
+  }
 
-function render() {
-  const tBody = document.getElementById("tBody");
-  rows.forEach((row) => {
-    console.log(rows);
-    const tr = tBody.insertRow(-1);
+  render() {
+    const tBody = document.getElementById("tBody");
+
+    // try each rows renders itself, the event is attached to the row
+    // render returns the row and its appended in the foreach (onload)
+
+    const trow = document.createElement("tr");
+
+    trow.addEventListener("change", (event) => {
+      this[event.target.name] = event.target.value;
+      localStorage.setItem("table", JSON.stringify(rows));
+    });
     //first cell
-    const td1 = tr.insertCell();
+    const td1 = trow.insertCell();
     const button = document.createElement("input");
     button.setAttribute("type", "button");
     button.setAttribute("value", "Remove");
+    button.setAttribute("name", "Remove");
     button.setAttribute("class", "button");
     // add button's 'onclick' event.
     button.setAttribute("onclick", "removeRow(this)");
     td1.appendChild(button);
 
     //second cell
-    const td2 = tr.insertCell();
-    var ele = document.createElement("input");
+    const td2 = trow.insertCell();
+    let ele = document.createElement("input");
+
+    ele.setAttribute("name", "init");
 
     ele.setAttribute("type", "number");
     ele.setAttribute("onBlur", "sortTable()");
     ele.setAttribute("id", "init");
     ele.setAttribute("autocomplete", "off");
-    ele.setAttribute("value", row.init);
+    ele.setAttribute("value", this.init);
 
     td2.appendChild(ele);
     //third cell
-    const td3 = tr.insertCell();
+    const td3 = trow.insertCell();
 
-    var ele3 = document.createElement("input");
+    let ele3 = document.createElement("input");
+    ele3.setAttribute("name", "name");
+
     ele3.setAttribute("type", "text");
-    ele3.setAttribute("value", row.name);
+    ele3.setAttribute("value", this.name);
     td3.appendChild(ele3);
 
     //fourth cell
-    const td4 = tr.insertCell();
+    const td4 = trow.insertCell();
 
-    var ele4 = document.createElement("input");
+    let ele4 = document.createElement("input");
+    ele4.setAttribute("name", "hp");
+
     ele4.setAttribute("type", "text");
-    ele4.setAttribute("value", row.hp);
+    ele4.setAttribute("value", this.hp);
     td4.appendChild(ele4);
 
     //fifth cell
-    const td5 = tr.insertCell();
+    const td5 = trow.insertCell();
 
-    var ele5 = document.createElement("input");
+    let ele5 = document.createElement("input");
+    ele5.setAttribute("name", "conditions");
+
     ele5.setAttribute("type", "text");
-    ele5.setAttribute("value", row.conditions);
+    ele5.setAttribute("value", this.conditions);
     td5.appendChild(ele5);
-  });
+    tBody.appendChild(trow);
+  }
 }
+let rows = [];
+let round = 1;
 
 function addRow() {
   rows.push(new Row());
   console.log(rows);
+  renderAll();
 }
 
 function removeRow(rowIndex) {
   rows.splice(rowIndex, 1);
+  renderAll();
 }
 
 function sortTable() {
   rows.sort((a, b) => a.init - b.init);
+  renderAll();
 }
 
 function advanceTurn() {
@@ -115,12 +136,22 @@ function reset() {
 
 function createTable() {
   if (localStorage.getItem("table")) {
-    console.log("hola");
-    //load
+    table = JSON.parse(localStorage.table);
+
+    rows = table.map((row) => {
+      return new Row(...Object.values(row));
+    });
+    renderAll();
     return;
   }
   addRow();
-  render();
+  renderAll();
+}
+
+function renderAll() {
+  rows.forEach((row) => {
+    row.render();
+  });
 }
 
 // function createTable() {
@@ -288,7 +319,7 @@ function resetOld() {
 }
 
 function getRows() {
-  var table = document.getElementById("empTable");
-  var rows = table.rows;
+  const table = document.getElementById("empTable");
+  const rows = table.rows;
   return rows;
 }
