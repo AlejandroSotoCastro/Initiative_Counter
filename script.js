@@ -3,10 +3,6 @@ const display = document.querySelector(".display");
 
 var table = document.getElementById("table");
 
-display.value = "Round 1";
-var round_counter = 1;
-var turn_counter = 1;
-
 // table headers.
 props = ["", "INITIATIVE", "NAME", "HP", "CONDITIONS"];
 
@@ -14,20 +10,25 @@ props = ["", "INITIATIVE", "NAME", "HP", "CONDITIONS"];
 
 class Row {
   constructor(init, name, hp, conditions, hasATurn) {
-    this.init = init || null;
+    this.init = init || 0;
     this.name = name || "";
     this.hp = hp || "";
     this.conditions = conditions || "";
     this.hasATurn = hasATurn || false;
+    this.id = Date.now().toString(36);
   }
 
   render() {
     const tBody = document.getElementById("tBody");
+    const { id } = this;
 
     // try each rows renders itself, the event is attached to the row
     // render returns the row and its appended in the foreach (onload)
 
     const trow = document.createElement("tr");
+    if (this.hasATurn) {
+      trow.style.backgroundColor = "#78c986";
+    }
 
     trow.addEventListener("change", (event) => {
       this[event.target.name] = event.target.value;
@@ -41,7 +42,7 @@ class Row {
     button.setAttribute("name", "Remove");
     button.setAttribute("class", "button");
     // add button's 'onclick' event.
-    button.setAttribute("onclick", "removeRow(this)");
+    button.setAttribute("onclick", `removeRow("${id}")`);
     td1.appendChild(button);
 
     //second cell
@@ -89,22 +90,44 @@ class Row {
     tBody.appendChild(trow);
   }
 }
+
 let rows = [];
 let round = 1;
 
+function createTable() {
+  const storedRound = localStorage.getItem("round");
+  if (storedRound) round = Number(localStorage.getItem("round"));
+  updateRound();
+
+  const storedTable = localStorage.getItem("table");
+  if (storedTable) {
+    table = JSON.parse(storedTable);
+
+    rows = table.map((row) => {
+      console.log(...Object.values(row));
+      return new Row(...Object.values(row));
+    });
+    renderAll();
+    return;
+  }
+  addRow();
+  renderAll();
+}
 function addRow() {
   rows.push(new Row());
   console.log(rows);
   renderAll();
 }
 
-function removeRow(rowIndex) {
-  rows.splice(rowIndex, 1);
+function removeRow(rowId) {
+  rows = rows.filter(function (row) {
+    return row.id !== rowId;
+  });
   renderAll();
 }
 
 function sortTable() {
-  rows.sort((a, b) => a.init - b.init);
+  rows.sort((a, b) => b.init - a.init);
   renderAll();
 }
 
@@ -115,6 +138,8 @@ function advanceTurn() {
   // deal with edge case (none hasATurn )
   if (lastTurnIndex < 0) {
     rows[0].hasATurn = true;
+    renderAll();
+
     return;
   }
   // remove previous hasATurn if any
@@ -123,34 +148,35 @@ function advanceTurn() {
   // deal with edge case (last of the table)
   if (isLast) {
     rows[0].hasATurn = true;
+    round++;
+
+    updateRound();
+    renderAll();
+
     return;
   }
   // advance the turn
   rows[lastTurnIndex + 1].hasATurn = true;
-}
-
-function reset() {
-  turn = 0;
-  round = 1;
-}
-
-function createTable() {
-  if (localStorage.getItem("table")) {
-    table = JSON.parse(localStorage.table);
-
-    rows = table.map((row) => {
-      return new Row(...Object.values(row));
-    });
-    renderAll();
-    return;
-  }
-  addRow();
   renderAll();
 }
 
+function updateRound() {
+  localStorage.setItem("round", round);
+  display.value = "Round " + round.toString();
+}
+
+function reset() {
+  // turn = 0;
+  //loop over rows and remove hasAturn
+  round = 1;
+  updateRound();
+}
+
 function renderAll() {
+  document.getElementById("tBody").innerHTML = "";
   rows.forEach((row) => {
     row.render();
+    return;
   });
 }
 
