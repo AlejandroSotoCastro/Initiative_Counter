@@ -29,7 +29,7 @@ class Row {
     // Table headers.
     const props = ["Remove", "init", "name", "hp", "conditions"];
     // Insert cells
-    props.forEach((prop, index) => this._addCell_addCell(tRow, prop, index, id));
+    props.forEach((prop, index) => this._addCell(tRow, prop, index, id));
 
     tBody.appendChild(tRow);
   }
