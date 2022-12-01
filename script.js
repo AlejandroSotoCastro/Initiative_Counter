@@ -16,7 +16,7 @@ class Row {
 
     // Change background if has a turn
     if (this.hasATurn) {
-      tRow.style.backgroundColor = "#78c986";
+      tRow.setAttribute("class", "selected");
     }
 
     // Update the values if changed
