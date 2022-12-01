@@ -1,4 +1,3 @@
-// select the <input type="text" class="display" disabled> element
 const display = document.querySelector(".display");
 class Row {
   constructor(init, name, hp, conditions, hasATurn, id) {
