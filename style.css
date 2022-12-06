@@ -139,3 +139,7 @@ td {
 .old_ie_wrapper tbody {
   height: auto;
 }
+
+.selected {
+  background-color: #78c986;
+}

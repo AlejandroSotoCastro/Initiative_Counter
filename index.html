@@ -12,10 +12,23 @@
       <!-- display -->
       <input type="text" class="display" disabled />
       <!-- Button to iterate through turns -->
-      <button class="button" onclick="turn()">Next Turn</button>
+      <button class="button" onclick="advanceTurn()">Next Turn</button>
     </div>
 
-    <div id="cont"></div>
+    <table id="table" class="fixed_headers">
+      <thead>
+        <tr>
+          <th><button type="button" class="button" onclick="addRow()">Add New Row</button></th>
+          <th>INITIATIVE</th>
+          <th>NAME</th>
+          <th>HP</th>
+          <th>CONDITIONS</th>
+        </tr>
+      </thead>
+      <tbody id="tBody"></tbody>
+    </table>
     <!--the container to add the table.-->
   </body>
+  <script src="./script.js"></script>
+  <link rel="stylesheet" href="./style.css" type="text/css" />
 </html>
