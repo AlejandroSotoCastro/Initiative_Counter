@@ -1,5 +1,14 @@
 const display = document.querySelector(".display");
 class Row {
+  /**
+   * @param {number} init Total initiative rolled for the encounter.
+   * @param {string} name Character name.
+   * @param {string} hp Health Points of the character
+   * @param {string} conditions or effects the character might be under
+   * @param {boolean} hasATurn Current PC its having their turn
+   * @param {string} id Unique identifier
+   */
+
   constructor(init, name, hp, conditions, hasATurn, id) {
     this.init = init || 0;
     this.name = name || "";
@@ -66,7 +75,7 @@ let round = 1;
 
 function createTable() {
   const storedRound = localStorage.getItem("round");
-  if (storedRound) round = Number(localStorage.getItem("round"));
+  if (storedRound) round = Number(storedRound);
   updateRound();
 
   const storedTable = localStorage.getItem("table");
