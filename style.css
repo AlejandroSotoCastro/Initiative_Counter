@@ -1,3 +1,58 @@
+.hamburger-menu {
+  display: inline-block;
+  margin-right: 15px;
+  left: 15px;
+  position: absolute;
+  text-align: left;
+}
+
+.menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  padding: 0.5em;
+}
+
+.menu-icon:hover {
+  background-color: #8b98ac;
+  border-radius: 50%;
+  color: #333;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu {
+  background-color: #f1c544;
+  border-radius: 3px;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 100%;
+  bottom: -120%;
+  z-index: 99;
+  font-size: 16px;
+  right: 7px;
+}
+
+.menu li {
+  display: block;
+}
+
+.menu li a {
+  color: #333;
+  display: block;
+  padding: 0.5em;
+  text-decoration: none;
+}
+
+.menu li a:hover {
+  background-color: #8b98ac;
+}
+
 body {
   width: 100vw;
   height: 100vh;

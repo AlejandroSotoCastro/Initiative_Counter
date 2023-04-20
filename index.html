@@ -8,6 +8,27 @@
   <body onload="createTable()">
     <!-- Initiative Counter-->
     <div class="initCounter">
+      <div class="hamburger-menu">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon">&#9776;</label>
+        <ul class="menu">
+          <li><a href="https://character-stats.netlify.app">Stats Calculator</a></li>
+          <li><a href="https://jeannots-group-check-tool.netlify.app">Check Calculator</a></li>
+          <!-- <li><a href="#">Others</a></li> -->
+        </ul>
+        <script>
+          const menu = document.querySelector(".menu");
+          const hamburgerMenu = document.querySelector(".hamburger-menu");
+
+          menu.addEventListener("mouseleave", function () {
+            this.style.display = "none";
+          });
+
+          hamburgerMenu.addEventListener("click", function () {
+            menu.style.display = "block";
+          });
+        </script>
+      </div>
       <button class="button" onclick="reset()">Reset</button>
       <!-- display -->
       <input type="text" class="display" disabled />
