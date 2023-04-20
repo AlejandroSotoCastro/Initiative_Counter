@@ -1,8 +1,9 @@
 .hamburger-menu {
   display: inline-block;
   margin-right: 15px;
-  position: relative;
-  padding-right: 74%;
+  left: 15px;
+  position: absolute;
+  text-align: left;
 }
 
 .menu-icon {
@@ -33,7 +34,6 @@
   position: relative;
   top: 100%;
   bottom: -120%;
-  right: -20px;
   z-index: 99;
   font-size: 16px;
 }
