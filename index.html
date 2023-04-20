@@ -16,6 +16,18 @@
           <li><a href="https://jeannots-group-check-tool.netlify.app">Check Calculator</a></li>
           <!-- <li><a href="#">Others</a></li> -->
         </ul>
+        <script>
+          const menu = document.querySelector(".menu");
+          const hamburgerMenu = document.querySelector(".hamburger-menu");
+
+          menu.addEventListener("mouseleave", function () {
+            this.style.display = "none";
+          });
+
+          hamburgerMenu.addEventListener("click", function () {
+            menu.style.display = "block";
+          });
+        </script>
       </div>
       <button class="button" onclick="reset()">Reset</button>
       <!-- display -->
