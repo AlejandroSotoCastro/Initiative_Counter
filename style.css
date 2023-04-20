@@ -14,7 +14,7 @@
 }
 
 .menu-icon:hover {
-  background-color: #f2f2f2;
+  background-color: #8b98ac;
   border-radius: 50%;
   color: #333;
 }
@@ -24,8 +24,7 @@
 }
 
 .menu {
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #f1c544;
   border-radius: 3px;
   display: none;
   list-style: none;
@@ -36,6 +35,7 @@
   bottom: -120%;
   z-index: 99;
   font-size: 16px;
+  right: 7px;
 }
 
 .menu li {
@@ -50,19 +50,9 @@
 }
 
 .menu li a:hover {
-  background-color: #f2f2f2;
+  background-color: #8b98ac;
 }
 
-/* adjust position of the menu */
-
-#menu-toggle:checked ~ .menu {
-  bottom: calc(10% + 10px);
-  display: block;
-}
-/*
-#menu-toggle:checked ~ .menu {
-  display: block;
-} */
 body {
   width: 100vw;
   height: 100vh;
